@@ -1,7 +1,17 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import { defineConfig } from "vite"
+import vue from "@vitejs/plugin-vue"
+import path from "path"
+import UnoCss from "unocss/vite"
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-});
+  resolve: {
+    alias: [
+      {
+        find: "@",
+        replacement: path.resolve(__dirname, "src")
+      }
+    ]
+  },
+  plugins: [vue(), UnoCss()]
+})
