@@ -8,7 +8,7 @@ const routes: RouteRecordRaw[] = [
     component: Layout,
     children: [
       {
-        path: "dashboard",
+        path: "/dashboard",
         name: "Ddashboard",
         component: () => import("@/views/dashboard/index.vue")
       }

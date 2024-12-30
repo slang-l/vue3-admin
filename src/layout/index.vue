@@ -18,20 +18,20 @@
   @apply flex w-full h-full;
 
   .sider-container {
-    @apply bg-red w-[210px];
+    @apply bg-red w-[var(--sidebar-width)];
   }
   .main-contaner {
     @apply flex flex-col flex-1;
   }
   .head {
-    @apply h-89px bg-blue;
+    @apply h-[var(--navbar-height)] bg-blue;
   }
   .tags-view {
-    @apply h-34px bg-green;
+    @apply h-[var(--tagsview-height)] bg-green;
   }
 }
 .app-main {
   @apply bg-amber;
-  min-height: calc(100vh - 84px);
+  min-height: calc(100vh - var(--navbar-height) - var(--tagsview-height));
 }
 </style>
