@@ -3,3 +3,16 @@
 $sideBarWidth: 210px;
 $navBarHeight: 50px;
 $tagsViewHeight: 34px;
+
+// 导航颜色
+$menuText: #bfcbd9;
+// 导航激活的颜色
+$menuActiveText: #409eff;
+// 菜单背景色
+$menuBg: #304156;
+
+:export {
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  menuBg: $menuBg;
+}

@@ -1,9 +1,11 @@
 <template>
-  <div class="app-wrapper" text-red>
-    <div class="sider-container">侧边栏</div>
+  <div class="app-wrapper" text-black>
+    <div class="sider-container">
+      <SideBar></SideBar>
+    </div>
     <div class="main-contaner">
       <div class="header">
-        <div class="navbar">导航条-1</div>
+        <NavBar></NavBar>
         <div class="tags-view">导航条-2</div>
       </div>
       <div class="app-main">
@@ -12,13 +14,19 @@
     </div>
   </div>
 </template>
+<script lang="ts" setup>
+import SideBar from "@/layout/components/SideBar/index.vue"
+import NavBar from "@/layout/components/NavBar/index.vue"
+</script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .app-wrapper {
   @apply flex w-full h-full;
 
   .sider-container {
-    @apply bg-red w-[var(--sidebar-width)];
+    :deep(.sidebar-container-menu:not(.el-menu--collapse)) {
+      @apply w-[var(--sidebar-width)];
+    }
   }
   .main-contaner {
     @apply flex flex-col flex-1;
