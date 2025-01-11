@@ -8,10 +8,7 @@
     :active-text-color="variables.menuActiveText"
     :collapse="sidebar.opened"
   >
-    <el-menu-item index="/dashboard">
-      <el-icon><icon-menu /></el-icon>
-      <span>导航一</span>
-    </el-menu-item>
+    <SidebarItem v-for="r in routes" :key="r.path" :item="r"></SidebarItem>
   </el-menu>
 </template>
 
@@ -20,6 +17,9 @@ import { useAppStore } from "@/stores/app"
 import variables from "@/styles/variable.module.scss"
 import { computed } from "vue"
 import { useRoute } from "vue-router"
+
+import SidebarItem from "./componens/SidebarItem.vue"
+import { routes } from "@/router/index"
 
 const route = useRoute()
 

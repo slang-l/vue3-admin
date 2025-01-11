@@ -1,5 +1,5 @@
 <template>
-  <div class="hamburger-container" @click="toggleClick">
+  <div class="hamburger-container">
     <svg-icon
       icon-name="ant-design:bars-outlined"
       custom-class="hamburger"

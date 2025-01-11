@@ -1,6 +1,5 @@
 <template>
   <div class="navbar">
-    {{ store.sidebar.opened }}
     <Hamburger
       @toggleCollapse="store.toggleSidebar"
       :collapse="store.sidebar.opened"
