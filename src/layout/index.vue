@@ -8,15 +8,14 @@
         <NavBar></NavBar>
         <div class="tags-view">导航条-2</div>
       </div>
-      <div class="app-main">
-        <RouterView></RouterView>
-      </div>
+      <AppMain></AppMain>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import SideBar from "@/layout/components/SideBar/index.vue"
 import NavBar from "@/layout/components/NavBar/index.vue"
+import AppMain from "./components/AppMain.vue"
 </script>
 
 <style lang="scss" scoped>
@@ -24,6 +23,7 @@ import NavBar from "@/layout/components/NavBar/index.vue"
   @apply flex w-full h-full;
 
   .sider-container {
+    @apply bg-var(--menu-bg)
     :deep(.sidebar-container-menu:not(.el-menu--collapse)) {
       @apply w-[var(--sidebar-width)];
     }
@@ -37,9 +37,5 @@ import NavBar from "@/layout/components/NavBar/index.vue"
   .tags-view {
     @apply h-[var(--tagsview-height)] bg-green;
   }
-}
-.app-main {
-  @apply bg-amber;
-  min-height: calc(100vh - var(--navbar-height) - var(--tagsview-height));
 }
 </style>

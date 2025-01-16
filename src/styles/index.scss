@@ -4,4 +4,14 @@
   --sidebar-width: #{$sideBarWidth};
   --navbar-height: #{$navBarHeight};
   --tagsview-height: #{$tagsViewHeight};
+  --menu-bg: #{$menuBg};
+}
+
+a {
+  @apply active: {
+    decoration: none;
+  }
+  hover: {
+    decoration: none;
+  }
 }

@@ -10,7 +10,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     children: [
       {
         path: "/dashboard",
-        name: "Ddashboard",
+        name: "dashboard",
         component: () => import("@/views/dashboard/index.vue"),
         meta: {
           icon: "ant-design:bank-outlined",
@@ -28,7 +28,7 @@ const asyncRoutes: RouteRecordRaw[] = [
     component: Layout,
     children: [
       {
-        path: "/index",
+        path: "index",
         name: "documentation",
         component: () => import("@/views/documentation/index.vue"),
         meta: {
@@ -44,7 +44,7 @@ const asyncRoutes: RouteRecordRaw[] = [
     component: Layout,
     children: [
       {
-        path: "/index",
+        path: "index",
         name: "guide",
         component: () => import("@/views/guide/index.vue"),
         meta: {
@@ -56,15 +56,17 @@ const asyncRoutes: RouteRecordRaw[] = [
   },
   {
     path: "/system",
-    redirect: "/system/user",
+    redirect: "/system/menu",
     component: Layout,
     meta: {
       icon: "ant-design:unlock-filled",
-      title: "系统管理"
+      title: "系统管理",
+      alwaysShow: true
+      // 作为父文件夹一直显示
     },
     children: [
       {
-        path: "/menu",
+        path: "menu",
         name: "menu",
         component: () => import("@/views/system/menu.vue"),
         meta: {
@@ -73,7 +75,7 @@ const asyncRoutes: RouteRecordRaw[] = [
         }
       },
       {
-        path: "/role",
+        path: "role",
         name: "role",
         component: () => import("@/views/system/role.vue"),
         meta: {
@@ -82,12 +84,27 @@ const asyncRoutes: RouteRecordRaw[] = [
         }
       },
       {
-        path: "/user",
+        path: "user",
         name: "user",
         component: () => import("@/views/system/user.vue"),
         meta: {
           icon: "ant-design:user-outlined",
           title: "用户管理"
+        }
+      }
+    ]
+  },
+  {
+    path: "/external-link",
+    components: Layout,
+    children: [
+      {
+        path: "https://www.baidu.com",
+        name: "external-link",
+        redirect: "/",
+        meta: {
+          icon: "ant-design:global-outlined",
+          title: "外部链接"
         }
       }
     ]

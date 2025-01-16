@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    router
+    border-none
     class="sidebar-container-menu"
     :default-active="defaultActive"
     :background-color="variables.menuBg"
@@ -8,7 +8,12 @@
     :active-text-color="variables.menuActiveText"
     :collapse="sidebar.opened"
   >
-    <SidebarItem v-for="r in routes" :key="r.path" :item="r"></SidebarItem>
+    <SidebarItem
+      v-for="r in routes"
+      :key="r.path"
+      :item="r"
+      :base-path="r.path"
+    ></SidebarItem>
   </el-menu>
 </template>
 
@@ -27,7 +32,6 @@ const { sidebar } = useAppStore()
 
 const defaultActive = computed(() => {
   const { path } = route
-  console.log(path)
 
   return path
 })

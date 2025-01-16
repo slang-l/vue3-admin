@@ -1,10 +1,12 @@
 <template>
-  <el-button type="primary">hello</el-button>
-  <HelloWorld msg="123"></HelloWorld>
-  <svg-icon
-    icon-name="ant-design:apple-filled"
-    custom-class="w-2em h-2em text-red"
-  ></svg-icon>
+  <div>
+    <el-button type="primary">hello</el-button>
+    <HelloWorld msg="123"></HelloWorld>
+    <svg-icon
+      icon-name="ant-design:apple-filled"
+      custom-class="w-2em h-2em text-red"
+    ></svg-icon>
+  </div>
 </template>
 
 <script lang="ts" setup>
