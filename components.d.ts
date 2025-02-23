@@ -11,7 +11,6 @@ declare module 'vue' {
     Breadcrumb: typeof import('./src/layout/components/Breadcrumb/index.vue')['default']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
-    ElButton: typeof import('element-plus/es')['ElButton']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
@@ -24,7 +23,6 @@ declare module 'vue' {
     Screenfull: typeof import('./src/layout/components/Screenfull/index.vue')['default']
     SideBar: typeof import('./src/layout/components/SideBar/index.vue')['default']
     SidebarItem: typeof import('./src/layout/components/SideBar/componens/SidebarItem.vue')['default']
-    SIdebarItem: typeof import('./src/layout/components/SideBar/componens/SIdebarItem.vue')['default']
     SidebarItemLink: typeof import('./src/layout/components/SideBar/componens/SidebarItemLink.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
   }
