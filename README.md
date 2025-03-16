@@ -10,18 +10,18 @@
 
 # todo list
 ## 用户管理：
-[ ] 登陆注册
-[ ] 404页面
+<input type="checkbox"> 登陆注册  
+<input type="checkbox"> 404页面
 ## 首页
-[ ] header
-[ ] 数据，仪表盘等
+<input type="checkbox"> header
+<input type="checkbox"> 数据，仪表盘等
 ## 系统管理
-[ ] 用户管理
-[ ] 角色管理
-[ ] 菜单管理
-[ ] 部门管理
-[ ] 日志
+<input type="checkbox"> 用户管理
+<input type="checkbox"> 角色管理
+<input type="checkbox"> 菜单管理
+<input type="checkbox"> 部门管理
+<input type="checkbox"> 日志
 
 ## 说明文档
-[ ] 具体功能
-[ ] 组件
+<input type="checkbox"> 具体功能
+<input type="checkbox"> 组件
