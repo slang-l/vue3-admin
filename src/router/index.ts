@@ -4,6 +4,14 @@ import Layout from "@/layout/index.vue"
 
 export const constantRoutes: RouteRecordRaw[] = [
   {
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/login/index.vue"),
+    meta: {
+      title: "登录"
+    }
+  },
+  {
     path: "/",
     component: Layout,
     redirect: "/dashboard",
