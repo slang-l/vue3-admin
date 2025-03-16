@@ -24,4 +24,4 @@
 
 ## 说明文档
 <input type="checkbox"> 具体功能
-<input type="checkbox"> 组件
+- [] 组件
