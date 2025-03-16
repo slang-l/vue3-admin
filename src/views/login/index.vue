@@ -44,21 +44,34 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      username: "",
-      password: ""
-    }
-  },
-  methods: {
-    handleLogin() {
-      // 登录逻辑
-      console.log("用户名:", this.username)
-      console.log("密码:", this.password)
-      // 这里可以添加调用API的代码
-    }
+<script setup>
+import { ref } from "vue"
+import { useRouter } from "vue-router"
+import { login } from "@/api/user"
+import { ElMessage } from "element-plus"
+
+// 响应式状态
+const loading = ref(false)
+const router = useRouter()
+const username = ref("")
+const password = ref("")
+
+// 登录方法
+const handleLogin = async () => {
+  // 登录逻辑
+  console.log("用户名:", username.value)
+  console.log("密码:", password.value)
+  // 这里可以添加调用API的代码
+  try {
+    loading.value = true
+    await login({ username: username.value, password: password.value })
+    localStorage.setItem("username", username.value)
+    localStorage.setItem("password", password.value)
+    router.push("/")
+  } catch (error) {
+    ElMessage.error(error.response.data.msg || "出错了")
+  } finally {
+    loading.value = false
   }
 }
 </script>
