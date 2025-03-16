@@ -1,0 +1,36 @@
+name: 部署到GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 设置 Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'pnpm'
+    
+    - name: 安装 pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 8
+        run_install: false
+    
+    - name: 安装依赖
+      run: pnpm install --frozen-lockfile
+    
+    - name: 构建项目
+      run: pnpm run build
+    
+    - name: 部署到GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: dist # Vue项目构建输出的文件夹
+        branch: gh-pages # 部署的目标分支 
