@@ -24,7 +24,7 @@ const handleClick = () => {
 
 <style lang="scss" scoped>
 .hamburger-container {
-  @apply leading-[50px] float-left cursor-pointer px-10px hover:(bg-black/5);
+  @apply leading-[50px] float-left cursor-pointer px-10px hover:(bg-black/5) flex items-center;
 }
 .hamburger {
   @apply w-30px h-30px transition-transform duration-300;

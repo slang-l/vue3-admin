@@ -6,9 +6,13 @@
     ></Hamburger>
 
     <Breadcumb></Breadcumb>
+
+    <!-- 全屏按钮 -->
     <div flex justify-end flex-1 items-center>
       <Screenfull></Screenfull>
     </div>
+
+    <!-- 图像图标 -->
   </div>
 </template>
 
