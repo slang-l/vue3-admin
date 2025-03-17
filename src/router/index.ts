@@ -8,7 +8,8 @@ export const constantRoutes: RouteRecordRaw[] = [
     name: "login",
     component: () => import("@/views/login/index.vue"),
     meta: {
-      title: "登录"
+      title: "登录",
+      hidden: true
     }
   },
   {

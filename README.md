@@ -10,11 +10,11 @@
 
 # todo list
 ## 用户管理：
-<input type="checkbox"> 登陆注册  
+<input type="checkbox"> 登陆注册 √
 <input type="checkbox"> 404页面
 ## 首页
-<input type="checkbox"> header
-<input type="checkbox"> 数据，仪表盘等
+<input type="checkbox"> header √
+<input type="checkbox"> 数据，仪表盘等 √
 ## 系统管理
 <input type="checkbox"> 用户管理
 <input type="checkbox"> 角色管理
