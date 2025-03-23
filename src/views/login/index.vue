@@ -27,6 +27,25 @@
             class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
           />
         </div>
+        <div class="mb-4">
+          <label for="password" class="block text-sm font-medium text-gray-700"
+            >验证码</label
+          >
+          <div class="flex items-center justify-center">
+            <input
+              type="text"
+              id="verCode"
+              v-model="verCode"
+              required
+              class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            />
+            <img
+              :src="captchaUrl"
+              class="w-16 h-16"
+              @click="handleChangeCaptcha"
+            />
+          </div>
+        </div>
         <div class="mb-4 flex items-center justify-center">
           <button
             type="submit"
@@ -45,9 +64,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, onMounted } from "vue"
 import { useRouter } from "vue-router"
-import { login } from "@/api/user"
+import { login, getCaptcha } from "@/api/user"
 import { ElMessage } from "element-plus"
 
 // 响应式状态
@@ -55,6 +74,8 @@ const loading = ref(false)
 const router = useRouter()
 const username = ref("")
 const password = ref("")
+const verCode = ref("")
+const captchaUrl = ref("")
 
 // 登录方法
 const handleLogin = async () => {
@@ -64,16 +85,36 @@ const handleLogin = async () => {
   // 这里可以添加调用API的代码
   try {
     loading.value = true
-    await login({ username: username.value, password: password.value })
-    localStorage.setItem("username", username.value)
-    localStorage.setItem("password", password.value)
+    const res = await login({
+      username: username.value,
+      password: password.value,
+      verCode: verCode.value
+    })
+    if (res.code !== 900) {
+      localStorage.setItem("username", username.value)
+      localStorage.setItem("password", password.value)
+    } else {
+      ElMessage.error(res)
+    }
     router.push("/")
   } catch (error) {
-    ElMessage.error(error.response.data.msg || "出错了")
+    ElMessage.error(error || "出错了")
   } finally {
     loading.value = false
   }
 }
+
+const handleChangeCaptcha = async () => {
+  try {
+    captchaUrl.value = await getCaptcha()
+  } catch (error) {
+    ElMessage.error(error || "无法加载验证码")
+  }
+}
+
+onMounted(() => {
+  handleChangeCaptcha()
+})
 </script>
 
 <style scoped>

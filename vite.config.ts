@@ -29,5 +29,24 @@ export default defineConfig({
       // 所有组件都可以自动加载
       dirs: ["src/components", "src/layout/components"]
     })
-  ]
+  ],
+  server:{
+    host: '0.0.0.0',
+    open:true,
+    cors: true,
+    proxy: {
+      '/login': {
+        target: 'http://121.36.218.185:8080',
+        changeOrigin: true,
+      },
+      '/captcha': {
+        target: 'http://121.36.218.185:8080',
+        changeOrigin: true,
+      },
+      '/sys/menu/nav': {
+        target: 'http://121.36.218.185:8080',
+        changeOrigin: true,
+      },
+    }
+  }
 })

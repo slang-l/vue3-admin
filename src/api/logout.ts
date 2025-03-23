@@ -4,7 +4,7 @@ import api from "./api"
 export const logout = async () => {
   try {
     ElMessage.info("正在登出")
-    await api.post("/api/logout")
+    await api.post("/logout")
     ElMessage.success("登出成功")
   } catch (error: Error | unknown) {
     ElMessage.error("登出错误")

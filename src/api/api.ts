@@ -2,14 +2,9 @@ import axios from "axios"
 import router from "@/router"
 import { jwtDecode } from "jwt-decode"
 
-const baseURL = import.meta.env.VITE_BASE_URL as string
-
 const api = axios.create({
-  baseURL: baseURL,
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Credentials": "true"
-  }
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+  timeout: 5000
 })
 
 function isJwtExpired(token: string) {
@@ -19,11 +14,17 @@ function isJwtExpired(token: string) {
 
 async function verifyToken() {
   const accessToken = localStorage.getItem("accessToken")
-  if (!accessToken) {
-    throw new Error("No access token found")
-  }
+  if (!accessToken) throw new Error("No access token found")
 
-  return !isJwtExpired(accessToken)
+  if (isJwtExpired(accessToken)) return false
+
+  try {
+    const res = await axios.post("/auth/verify", { token: accessToken })
+    return res.data.valid
+  } catch (e) {
+    console.error(e)
+    return false
+  }
 }
 
 async function refreshToken() {
@@ -37,7 +38,7 @@ async function refreshToken() {
     return
   }
 
-  const res = await axios.post("/api/refresh-token", {
+  const res = await axios.post("/refresh-token", {
     refreshToken
   })
 
@@ -72,7 +73,7 @@ api.interceptors.request.use(
     const accessToken = localStorage.getItem("accessToken")
     if (accessToken) {
       console.log("token", accessToken)
-      config.headers.Authorization = accessToken
+      config.headers.Authorization = `Bearer ${accessToken}`
     } else {
       router.push("/login")
     }

@@ -122,7 +122,38 @@ const asyncRoutes: RouteRecordRaw[] = [
 
 export const routes = [...constantRoutes, ...asyncRoutes]
 
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(), // 路由模式
   routes // 路由表
 })
+
+// 定义不需要登录就可以访问的白名单路由
+const whiteList = ["/login"]
+
+// 全局前置守卫
+router.beforeEach((to, from, next) => {
+  // 检查用户是否已登录（这里使用localStorage中是否有token作为判断依据）
+  const hasToken = localStorage.getItem("token")
+
+  if (hasToken) {
+    // 已登录状态
+    if (to.path === "/login") {
+      // 如果已登录，访问登录页则重定向到首页
+      next({ path: "/" })
+    } else {
+      // 正常访问其他页面
+      next()
+    }
+  } else {
+    // 未登录状态
+    if (whiteList.includes(to.path)) {
+      // 如果访问的是白名单页面，直接放行
+      next()
+    } else {
+      // 如果访问的不是白名单页面，重定向到登录页
+      next(`/login?redirect=${to.path}`)
+    }
+  }
+})
+
+export default router
