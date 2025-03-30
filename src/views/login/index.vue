@@ -65,13 +65,14 @@
 
 <script setup>
 import { ref, onMounted } from "vue"
-import { useRouter } from "vue-router"
+import { useRouter, useRoute } from "vue-router"
 import { login, getCaptcha } from "@/api/user"
 import { ElMessage } from "element-plus"
 
 // 响应式状态
 const loading = ref(false)
 const router = useRouter()
+const route = useRoute()
 const username = ref("")
 const password = ref("")
 const verCode = ref("")
@@ -89,6 +90,10 @@ const handleLogin = async () => {
     const result = await login({
       username: username.value,
       password: password.value,
+      // username: 'admin',
+      // password: '123456',
+      // verCode: 'najx7',
+      // uuid:'ae2b3fb3-2bfd-4508-82d3-6ceb39dfc688',
       verCode: verCode.value,
       uuid: captchaUuid.value
     })
@@ -96,7 +101,9 @@ const handleLogin = async () => {
       // 登录成功，API层已经存储了token
       ElMessage.success("登录成功")
       localStorage.setItem("username", username.value)
-      router.push("/")
+      // 检查是否有重定向路径
+      const redirectPath = route.query.redirect || ""
+      router.push(redirectPath || "/")
     } else {
       // 登录失败，刷新验证码
       handleChangeCaptcha()
@@ -111,7 +118,6 @@ const handleLogin = async () => {
 const handleChangeCaptcha = async () => {
   try {
     const res = await getCaptcha()
-    console.log("gb123", res)
     captchaUrl.value = res.image
     captchaUuid.value = res.key
   } catch (error) {
