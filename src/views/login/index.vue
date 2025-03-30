@@ -76,27 +76,31 @@ const username = ref("")
 const password = ref("")
 const verCode = ref("")
 const captchaUrl = ref("")
+const captchaUuid = ref("")
 
 // 登录方法
 const handleLogin = async () => {
-  // 登录逻辑
-  console.log("用户名:", username.value)
-  console.log("密码:", password.value)
-  // 这里可以添加调用API的代码
+  if (!username.value || !password.value || !verCode.value) {
+    ElMessage.warning("请填写完整的登录信息")
+    return
+  }
   try {
     loading.value = true
-    const res = await login({
+    const result = await login({
       username: username.value,
       password: password.value,
-      verCode: verCode.value
+      verCode: verCode.value,
+      uuid: captchaUuid.value
     })
-    if (res.code !== 900) {
+    if (result) {
+      // 登录成功，API层已经存储了token
+      ElMessage.success("登录成功")
       localStorage.setItem("username", username.value)
-      localStorage.setItem("password", password.value)
+      router.push("/")
     } else {
-      ElMessage.error(res)
+      // 登录失败，刷新验证码
+      handleChangeCaptcha()
     }
-    router.push("/")
   } catch (error) {
     ElMessage.error(error || "出错了")
   } finally {
@@ -106,9 +110,12 @@ const handleLogin = async () => {
 
 const handleChangeCaptcha = async () => {
   try {
-    captchaUrl.value = await getCaptcha()
+    const res = await getCaptcha()
+    console.log("gb123", res)
+    captchaUrl.value = res.image
+    captchaUuid.value = res.key
   } catch (error) {
-    ElMessage.error(error || "无法加载验证码")
+    console.error("获取验证码失败", error)
   }
 }
 
