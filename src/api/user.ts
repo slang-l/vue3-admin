@@ -1,4 +1,4 @@
-import { httpInstance } from "@/utils/request"
+import { httpInstance, type ApiResponse } from "@/utils/request"
 import { ElMessage } from "element-plus"
 
 // 定义接口参数类型
